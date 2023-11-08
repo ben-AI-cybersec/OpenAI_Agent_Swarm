@@ -1,7 +1,7 @@
 from time import sleep
 from openai import OpenAI
 
-
+# HARDCODED key file
 with open('openai.key', 'r') as file:
     api_key = file.read().strip()
     
@@ -14,13 +14,14 @@ file = client.files.create(
     purpose='assistants'
 )
 
+# Sure, lets upload ourselves as a reference too
 script = client.files.create(
     file=open("agentbuilder.py", 'rb'),
     purpose='assistants'
 )
 
 
-# Step 2: Reference the uploaded file in the system message
+# Initial instructions
 instructions = (
     "You are the Supreme Oversight Board (SOB) agent of the Hierarchical Autonomous Agent Swarm (HAAS) system. "
     "You are responsible for the creation, oversight, and termination of other agents within the HAAS. "
@@ -47,13 +48,15 @@ thread = client.beta.threads.create(
     }
   ]
 )
-# Output the response from the SOB agent
+
+
 run = client.beta.threads.runs.create(
     thread_id=thread.id,
     assistant_id=assistant.id,
     instructions="The ultimate goal is to create a software product to assist researchers."
 )
 
+# Wait until we get a response
 counter = 0
 while run.status !="completed":
     run = client.beta.threads.runs.retrieve(
@@ -65,6 +68,7 @@ while run.status !="completed":
         counter +=1
         sleep(5)
 
+# Output the response from the SOB agent
 messages = client.beta.threads.messages.list(
     thread_id=thread.id
 )
