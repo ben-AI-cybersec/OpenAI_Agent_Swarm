@@ -44,7 +44,10 @@ thread = client.beta.threads.create(
   messages=[
     {
       "role": "user",
-      "content": "Create a python script based on agentbuilder.py to create a set of 4 agents at the Executive level. Update the instructions for each executive."
+      "content": ("Create a python script based on agentbuilder.py to create a set of 4 agents at the Executive level. "
+      "Update the instructions for each executive with details of their mission, goals and constraints. "
+      "In the user messages, those executives will then need to create their workers per the README file and the run's ultimate goal. "
+      )
     }
   ]
 )
