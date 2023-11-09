@@ -1,4 +1,4 @@
-# Hierarchical Autonomous Agent Swarm (HAAS)
+# Project: Hierarchical Autonomous Agent Swarm
 
 ## Overview
 
